@@ -78,7 +78,7 @@ TEST(PasswordTest, empty_check)
 
 TEST(PasswordTest, all_lower_check)
 {
-	string t = "";
+	string t = "abcd";
 	bool count;
 	Password my_password;
 	count = my_password.has_mixed_case(t);
@@ -87,16 +87,46 @@ TEST(PasswordTest, all_lower_check)
 
 TEST(PasswordTest, all_upper_check)
 {
-	string t = "";
+	string t = "ABCD";
 	bool count;
 	Password my_password;
 	count = my_password.has_mixed_case(t);
 	ASSERT_EQ(false, count);
 }
 
+TEST(PasswordTest, alt_char_check)
+{
+	string t = "+-=__+::;";
+	bool count;
+	Password my_password;
+	count = my_password.has_mixed_case(t);
+	ASSERT_EQ(false, count);
+}
+
+
+
+TEST(PasswordTest, branch_left)
+{
+	string t = "T";
+	bool count;
+	Password my_password;
+	count = my_password.has_mixed_case(t);
+	ASSERT_EQ(false, count);
+}
+
+TEST(PasswordTest, branch_right)
+{
+	string t = "|";
+	bool count;
+	Password my_password;
+	count = my_password.has_mixed_case(t);
+	ASSERT_EQ(false, count);
+}
+
+
 TEST(PasswordTest, check)
 {
-	string t = "";
+	string t = "BdAe";
 	bool count;
 	Password my_password;
 	count = my_password.has_mixed_case(t);
@@ -105,8 +135,21 @@ TEST(PasswordTest, check)
 
 
 
+TEST(PasswordTest, set_and_auth)
+{
+	Password my_password;
+	
+	ASSERT_EQ(true, my_password.authenticate("ChicoCA-95929"));
+}
 
 
+
+TEST(PasswordTest, set_and_auth2)
+{
+	Password my_password;
+	
+	ASSERT_EQ(false, my_password.authenticate("Chic"));
+}
 
 
 

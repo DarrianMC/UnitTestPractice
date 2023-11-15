@@ -9,6 +9,15 @@ using std::string;
   end of the string). The function is case-sensitive so 'Z' is different than
   'z' and any ASCII characters are allowed.
 */
+
+
+Password::Password()
+{
+	Password::pass_history.push_back("ChicoCA-95929");
+}
+
+
+
 int Password::count_leading_characters(string phrase){
   int repetition = 1;
   int index = 0;
@@ -22,15 +31,16 @@ int Password::count_leading_characters(string phrase){
 
 bool Password::has_mixed_case(string str)
 {
+	
 	bool o = false;
 	bool t = false;
 	for(int i = 0; i< str.size(); i++)
 	{
-		if(str[i] >= 'A' || str[i] <= 'Z')
+		if(str[i] >= 'A' && str[i] <= 'Z')
 		{
 			o = true;
 		}
-		if(str[i] >= 'a' || str[i] <= 'z')
+		if(str[i] >= 'a' && str[i] <= 'z')
 		{
 			t = true;
 		}
@@ -39,3 +49,36 @@ bool Password::has_mixed_case(string str)
 	}
 	return (o == true && t == true);
 }
+
+
+void Password::set(string T)
+{
+	Password::pass_history.push_back(T);
+}
+
+
+
+bool Password::authenticate(string T)
+{
+	return T == Password::pass_history[Password::pass_history.size() - 1];
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
